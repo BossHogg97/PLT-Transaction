@@ -53,29 +53,7 @@ docker run -it gemini-api /bin/sh
 ### Explore
 
 - ⚡ The Platformatic DB server is running at http://localhost:5003/
-- 📔 View the REST API's Swagger documentation at http://localhost:5003/documentation/
-
-## Prisma setup
-Following the command list for setup and integrate Prisma. At first startup we must generate prisma client
-```
-1. 
-npx prisma init --datasource-provider postgresql
-
-2. 
-npx prisma db pull
-
-3.
-npx platformatic db migrations apply
-
-4.
-npx prisma db pull
-
-5.
-npx prisma generate
-
-6.
-npx platformatic db start
-```
+- 📔 View the REST API's Swagger documentation at http://localhost:5003/doc#overview
 
 ## Custom routes
 When update routes remove **dist** folder. This because when `pnpm start` is executed update dist and doesn't change old routes
