@@ -2,10 +2,10 @@ import fp from 'fastify-plugin'
 import { type FastifyInstance, FastifyRequest } from 'fastify'
 
 // Schema Imports
-import { schemaDelete, schemaUpdate } from './schema'
+import { schemaDelete, schemaUpdate, schemaMoveNode } from './schema'
 
 // Type Imports
-import { UpdateParentsBody, DeleteItemsParam } from './domain'
+import { UpdateParentsBody, DeleteItemsParam, UpdateActionsBody } from './domain'
 
 export default fp(async (app: FastifyInstance) => {
   app.delete(
@@ -70,6 +70,14 @@ export default fp(async (app: FastifyInstance) => {
         // rollback
         app.log.error(e)
       }
+    }
+  )
+
+  app.put(
+    '/boms/move',
+    { schema: schemaMoveNode },
+    async function (request: FastifyRequest<{ Body: UpdateActionsBody }>, reply) {
+      app.log.info(request.body) // This is an array
     }
   )
 })

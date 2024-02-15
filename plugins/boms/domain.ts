@@ -24,10 +24,25 @@ const requestBodyUpdateParents = z.object({
     itemToReplace: z.string()
 })
 
+const itemAction = z.object({
+    plantId: z.string(),
+    parentBefore: z.string(),
+    parentCurrent: z.string(),
+    uuid: z.string(),
+    targetPath: z.string(), // Used for append the moved node
+    sourcePath: z.string(), // Used for retrieve all children of given node and update path property
+    targetLevel: z.number(),
+    node: z.string(), // Is the name of dragged node
+  })
+  
+  const requestBodyActions = z.array(itemAction)
+
 // Create types from zod objects
 export type UpdateParentsBody = z.infer<typeof requestBodyUpdateParents>
 export type DeleteItemsParam = z.infer<typeof paramsDeleteItem>
+export type UpdateActionsBody = z.infer<typeof requestBodyActions>
 
 // Convert zod object to json schema
 export const requestPutSchema = zodToJsonSchema(requestBodyUpdateParents)
 export const paramsDeleteSchema = zodToJsonSchema(paramsDeleteItem)
+export const requestActionsSchema = zodToJsonSchema(requestBodyActions)
